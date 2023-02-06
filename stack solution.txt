@@ -1,0 +1,83 @@
+/* Reverse the string using stack */
+int main()
+{
+string s="looser"
+stack <char> st;
+for(int i=0;i<s.length();i++)
+{st.push(s[i]);}
+for(int i=0;i<s.length();i++)
+{
+s[i]=st.top();
+st.pop();}
+cout<<s<<endl;
+}
+
+/* Next Greater element */
+ st = []
+        ans = []
+   
+        for i in range((nums1-1),-1 , -1) :
+            if len(st) == 0:
+                ans.append(-1)
+            else:
+                while(len(st)>0 and st[-1] <= arr[i]):
+                    st.pop()
+                if len(st)==0:
+                    ans.append(-1)
+                else:
+                    ans.append(st[-1])
+            st.append(arr[i])
+        ans = ans [ : : -1 ]
+        return ans
+
+/* Valid Parentheses */
+stack = []
+        dic = {'(': ')', '[': ']', '{': '}'}
+        for c in s:
+            if stack and stack[-1] in "([{" and dic[stack[-1]] == c:
+                stack.pop()
+            else:
+                stack.append(c)
+        return not stack
+        
+ /* Scoring Parentheses */
+ int scoreOfParentheses(string s) {
+        stack<int>st;
+        int sum=0,n=s.length();
+        for(int i = 0;i<n;i++) {
+            if(s[i] == '(') {
+                if (st.empty())
+                st.push(1);
+                else
+                st.push(st.top()*2);
+            }
+            else
+            {
+                sum+=st.top();
+                st.pop();
+                 while(i+1<n && s[i+1]==')') {
+                    i++;
+                      st.pop();
+            }
+            }
+        }
+            return sum;
+    }
+};
+
+ /* Remove Duplicate elements */
+ int main()
+{ map<char,int> m;  
+    string ans="";
+    int i;
+    for(i=0;i<n;i++){
+        m[s[i]]=1;      
+    }
+    for(i=1;i<n;i++){
+        if(m[s[i]]>0){    
+            ans+=s[i];    
+        }
+        m[s[i]]=0;        
+    }
+    cout<<ans;
+}
