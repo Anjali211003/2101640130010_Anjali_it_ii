@@ -1,0 +1,90 @@
+#define pb push_back
+#define all(v) (v).begin(),(v).end()
+class Solution {
+private:
+    int MAH(vector<int>& arr)
+    {    int N = arr.size();
+        vector<int> right(N); 
+        vector<int> left(N);
+      right=NSR(arr,N);
+      left=NSL(arr,N);
+        int res = 0;
+
+        for(int i = 0; i < N; i++){
+
+            if(right[i]==-1)
+            right[i]=N;
+            int area = (right[i] - left[i] - 1) * arr[i];
+            res = max(res, area);
+        }
+
+        return res;
+    }
+      
+    
+    vector<int> NSR(vector<int> &nums,int n) {
+        
+        stack<int> st;
+        vector<int> v(n);
+             st.push(-1);
+        for(int i = n - 1; i >= 0; i--){
+            while(st.top()!=-1 && nums[st.top()] >= nums[i]){
+                st.pop();
+            }
+            v[i]=st.top();
+   
+            st.push(i);
+        }
+        
+        return v;
+    }
+    vector<int> NSL(vector<int> &nums,int n) {
+      
+        stack<int> st;
+        vector<int> v(n);
+             st.push(-1);
+        for(int i = 0; i < n; i++){
+            while(st.top()!=-1 && nums[st.top()] >= nums[i]){
+                st.pop();
+            }
+           v[i]=st.top();
+            
+            st.push(i);
+        }
+        return v;
+    }
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        ios_base::sync_with_stdio(false);
+       vector<vector<int>> mat;
+        
+       for(int i=0;i<matrix.size();i++)
+       {      vector<int>v;
+           for(int j=0;j<matrix[i].size();j++)
+           {
+               if(matrix[i][j]=='1')
+               v.push_back(1);
+               else
+              v.push_back(0);
+           }
+           mat.push_back(v);}
+           int n=mat.size();
+           int area=MAH(mat[0]);
+           for(int i=1;i<n;i++)
+           {
+               for(int j=0;j<mat[i].size();j++)
+               {
+                   if(mat[i][j]!=0)
+                   {
+                       mat[i][j]+=mat[i-1][j];
+                   }
+               }
+               area=max(area,MAH(mat[i]));
+           }
+           return area;
+        
+       }
+       
+    
+
+};
